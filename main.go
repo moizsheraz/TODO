@@ -17,23 +17,32 @@ type Todo struct {
 func main() {
 	fmt.Println("Hello, World!" + " " + "Greetings, Universe!")
 	app := fiber.New()
+	// variableName := value
 
 	// Correct variable name and initialization
 	todos := []Todo{}
+	// slice := []int{1, 2, 3, 4, 5, 6}
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.Status(200).JSON(fiber.Map{
 			"msg": "hello world",
 		})
 	})
+	// function in Golang
+	// func sum(a int, b int) int {
+   // return a + b
+// 		}
 
 	app.Post("/api/todos", func(c *fiber.Ctx) error {
-		todo := &Todo{}
+		todo := &Todo{} // create a Todo Array
 
 		// Correct method name for parsing
-		if err := c.BodyParser(todo); err != nil {
-			return c.Status(400).JSON(fiber.Map{"error": "Invalid request body"})
+		if err := c.BodyParser(todo);
+		err != nil {
+		return c.Status(400).JSON(fiber.Map{"error": "Invalid request body"})
 		}
+		// it means that there is some error 
+		//fiber.map is nothing but a Map data stucture
 
 		// Validate the todo body
 		if todo.Body == "" {
